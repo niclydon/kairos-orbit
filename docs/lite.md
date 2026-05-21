@@ -45,11 +45,27 @@ Lite mode has lower confidence for:
 
 Lite reports these as lower-confidence or inferred signals.
 
+## Epistemic Guardrail
+
+Lite mode must not treat absence of transcript evidence as evidence of absence.
+A user may verify claims in a separate browser tab, run tests in another
+terminal, check a source document, or integrate an output after the chat ends.
+Those actions are invisible to transcript-only analysis unless the transcript
+mentions them.
+
+Therefore Lite reports should say:
+
+> Missing verification, tool, artifact, or outcome evidence may reflect
+> out-of-band work rather than absence of the behavior.
+
+The reference reporter includes this caveat whenever Full-mode workflow
+evidence is missing or partial.
+
 ## Lite Score Interpretation
 
 A high Lite score means:
 
-> The transcript shows strong observable AI collaboration behavior.
+> The transcript shows strong observable compliance with AI workflow practices.
 
 It does not necessarily mean:
 

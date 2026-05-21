@@ -160,7 +160,7 @@ function dimensionDescription(key: keyof KairosSubscores): string {
     case "outcome_integration":
       return "Whether outputs become accountable decisions, artifacts, or follow-through.";
     case "social_affective_stance":
-      return "Interactional tone, repair quality, frustration, respect, and morale pressure.";
+      return "Operational friction, directness, repair quality, escalation control, and responsibility language.";
   }
 }
 
@@ -180,6 +180,9 @@ function inferDataGaps(input: {
     gaps.push("No Full-mode workflow telemetry was available; execution and outcome signals are transcript-inferred.");
   } else if (input.fullEvidenceCount < n) {
     gaps.push("Workflow telemetry is partial; compare Lite and Full conversations cautiously.");
+  }
+  if (input.fullEvidenceCount < n) {
+    gaps.push("Lite guardrail: missing transcript-visible verification, tool, or outcome evidence may reflect out-of-band work rather than absence of the behavior.");
   }
   if (input.timestampCount === 0) {
     gaps.push("No timestamps were available, so longitudinal trends cannot be generated from this input alone.");

@@ -14,7 +14,7 @@ When a user asks a coding CLI to run KAIROS-ORBIT Lite:
 
 1. Explain that raw transcript data is sensitive and should stay local.
 2. Inspect only user-approved directories or common local export locations.
-3. Normalize discovered conversations into `schemas/message.schema.json`.
+3. Normalize discovered conversations into `schemas/message.schema.json` with the native deterministic parsers.
 4. Run the deterministic scorer and Markdown reporter.
 5. Present the report path, score summary, confidence, and data gaps.
 6. Avoid committing raw normalized transcript files.
@@ -86,12 +86,11 @@ node scripts/collect-lite-input.mjs \
   --roots ~/Downloads ~/Desktop ~/.claude/projects ~/.codex/sessions
 ```
 
-Then normalize into a private ignored JSONL file:
+Then normalize into a private ignored JSONL file with the native parser CLI:
 
 ```bash
-node scripts/collect-lite-input.mjs \
-  --roots ~/Downloads ~/Desktop ~/.claude/projects ~/.codex/sessions \
-  --out kairos-lite-input.jsonl.private
+node dist/cli.js normalize ~/Downloads ~/Desktop ~/.claude/projects ~/.codex/sessions \
+  --output kairos-lite-input.jsonl.private
 ```
 
 Run the report:
@@ -110,8 +109,8 @@ For a fast local run after the user has approved common roots:
 ```bash
 npm install
 npm run build
-node scripts/collect-lite-input.mjs \
-  --roots ~/Downloads ~/Desktop ~/.claude/projects ~/.codex/sessions \
+node dist/cli.js normalize \
+  ~/Downloads ~/Desktop ~/.claude/projects ~/.codex/sessions \
   --out kairos-lite-input.jsonl.private
 node dist/cli.js report kairos-lite-input.jsonl.private --output kairos-lite-report.md
 ```
@@ -201,3 +200,18 @@ If an organization wants to wire KAIROS-ORBIT Lite into its own environment:
 4. Run `node dist/cli.js score` for JSON output or `report` for Markdown.
 5. Store raw transcripts separately from derived scores.
 6. Surface confidence and data gaps anywhere scores are displayed.
+
+## Native Parser Modules
+
+The repository includes first-class deterministic parser modules so agents do
+not need to invent adapters with an LLM at runtime:
+
+- `src/parsers/chatgpt.ts` handles ChatGPT-style `conversations.json` exports.
+- `src/parsers/claude.ts` handles common Claude/Claude-like JSON conversation
+  shapes with `messages`, `chat_messages`, `conversations`, or `chats`.
+- `src/parsers/generic.ts` handles KAIROS JSONL and generic JSON message rows.
+- `src/parsers/text.ts` handles Markdown/text transcripts with role prefixes.
+- `src/parsers/index.ts` exposes `parseTranscriptFile()` for CLI and library use.
+
+Use `node dist/cli.js normalize ... --output ...` as the stable command-line
+entrypoint for these adapters.

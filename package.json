@@ -1,18 +1,19 @@
 {
   "name": "kairos-orbit",
-  "version": "0.1.0",
-  "description": "Public framework and reference scorer for KAIROS-ORBIT operator AI fluency analysis.",
+  "version": "0.2.0",
+  "description": "Public framework and deterministic reference scorer for KAIROS-ORBIT AI workflow analysis.",
   "type": "module",
   "bin": {
     "kairos-orbit": "./dist/cli.js"
   },
   "scripts": {
     "build": "tsc",
+    "normalize": "node dist/cli.js normalize",
     "score": "node dist/cli.js",
     "report": "node dist/cli.js report",
     "collect:lite": "node scripts/collect-lite-input.mjs",
     "skill:install": "bash scripts/install-claude-skill.sh",
-    "check": "npm run build && node dist/cli.js score examples/synthetic-chat.jsonl > /tmp/kairos-orbit-smoke.json && node dist/cli.js report examples/synthetic-chat.jsonl --output /tmp/kairos-orbit-report.md && node scripts/collect-lite-input.mjs --roots examples --out /tmp/kairos-orbit-collected.jsonl && node dist/cli.js report /tmp/kairos-orbit-collected.jsonl --output /tmp/kairos-orbit-collected-report.md"
+    "check": "npm run build && node dist/cli.js score examples/synthetic-chat.jsonl > /tmp/kairos-orbit-smoke.json && node dist/cli.js report examples/synthetic-chat.jsonl --output /tmp/kairos-orbit-report.md && node dist/cli.js normalize examples --output /tmp/kairos-orbit-normalized.jsonl && node dist/cli.js report /tmp/kairos-orbit-normalized.jsonl --output /tmp/kairos-orbit-normalized-report.md && node scripts/collect-lite-input.mjs --roots examples --out /tmp/kairos-orbit-collected.jsonl && node dist/cli.js report /tmp/kairos-orbit-collected.jsonl --output /tmp/kairos-orbit-collected-report.md"
   },
   "keywords": [
     "ai-literacy",

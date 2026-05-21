@@ -18,11 +18,17 @@ Only with caution. The data coverage, task mix, source mix, and time windows nee
 
 ## Does ORBIT judge whether someone is polite?
 
-No. ORBIT measures observable stance patterns such as warmth markers, correction style, repair quality, affect-friction markers, and responsibility language. It should not moralize direct communication.
+No. ORBIT measures whether observable interaction patterns help or hurt the
+workflow: correction style, repair quality, affect-friction markers,
+directiveness, responsibility language, and next-step control. It should not
+moralize direct communication or reward politeness for its own sake.
 
 ## Can a terse command be fluent?
 
-Yes. Directness can be appropriate. The negative pattern is high dominance plus contempt plus no evidence or repair path.
+Yes. Directness can be appropriate, and terse high-density commands can be
+highly fluent when they contain clear scope, constraints, evidence, or next
+steps. The negative pattern is friction or contempt plus no evidence or repair
+path.
 
 ## Can frustration be productive?
 

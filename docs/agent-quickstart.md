@@ -33,9 +33,9 @@ If the user has local exports or transcript archives:
 
 ```bash
 node scripts/collect-lite-input.mjs --discover-only
-node scripts/collect-lite-input.mjs \
-  --roots ~/Downloads ~/Desktop ~/.claude/projects ~/.codex/sessions \
-  --out kairos-lite-input.jsonl.private
+node dist/cli.js normalize \
+  ~/Downloads ~/Desktop ~/.claude/projects ~/.codex/sessions \
+  --output kairos-lite-input.jsonl.private
 node dist/cli.js report kairos-lite-input.jsonl.private --output kairos-lite-report.md
 ```
 

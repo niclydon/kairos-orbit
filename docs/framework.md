@@ -1,12 +1,18 @@
 # KAIROS-ORBIT Framework Specification
 
-**Status:** public draft, v0.1  
-**Purpose:** measure observable AI collaboration practices from conversation and workflow data  
+**Status:** public draft, v0.2
+**Purpose:** audit observable structural compliance with AI workflow best practices from conversation and workflow data
 **Primary modes:** transcript-only Lite mode and workflow-aware Full mode
 
 ## Summary
 
-KAIROS-ORBIT is a candidate framework for analyzing operator AI fluency: how a person defines work for AI systems, supplies context, delegates tasks, verifies outputs, repairs errors, integrates results, and maintains a productive interactional stance over time.
+KAIROS-ORBIT is a candidate framework for auditing observable operator workflow patterns: how a person defines work for AI systems, supplies context, delegates tasks, verifies outputs, repairs errors, integrates results, and maintains operationally useful interaction under pressure.
+
+The framework should not be read as a direct measure of hidden cognition,
+personality, or general intelligence. The public reference engine is a
+deterministic structural scorer. Its strongest claim is that the available data
+shows more or less evidence of workflow practices associated with effective AI
+collaboration.
 
 The framework is a synthesis. The name is new, but the underlying constructs are grounded in established research areas:
 
@@ -86,20 +92,25 @@ In Lite mode this is often inferred from language and should be reported with lo
 
 ### Social And Affective Stance
 
-Measures observable interactional stance: collegiality, frustration, contempt, directiveness, repair style, responsibility language, and trust posture.
+Measures whether the operator's interaction style helps or hurts the workflow:
+directness, friction, escalation, correction utility, repair style,
+responsibility language, and trust posture.
 
-This dimension does not claim to know the user's hidden emotional state. It measures language and interaction patterns.
+This dimension does not claim to know the user's hidden emotional state. It
+does not reward politeness for its own sake, and it should not penalize terse,
+high-density operational commands. Frustration is treated as a possible
+workflow-breakdown signal only when it is not paired with useful repair,
+evidence, or next-step control.
 
 ## ORBIT Submodel
 
 ORBIT means **Operator Relational Bearing and Interaction Tone**.
 
-It expands Social and Affective Stance into:
+It expands Social and Affective Stance into operationally useful signals:
 
-- Valence: positive, neutral, negative affect markers.
-- Arousal: calm, urgent, escalated, high-pressure.
-- Dominance / agency: directiveness and control.
-- Communion / warmth: collegiality, acknowledgement, gratitude, shared-work framing.
+- Friction: observable frustration, escalation, or morale pressure.
+- Directiveness / agency: clear control of scope and next action.
+- Command density: terse but information-rich instructions.
 - Correction style: evidence-backed repair versus contemptuous correction.
 - Repair quality: what happens after trouble.
 - Trust calibration: neither blind trust nor blanket hostility.
@@ -126,6 +137,12 @@ Weak for:
 - Whether outputs were used.
 - Whether tests passed.
 - Whether work shipped.
+
+Lite mode must include an epistemic guardrail: absence of transcript-visible
+verification, fact-checking, or outcome evidence is not evidence that those
+actions did not happen. They may have occurred in another browser tab, terminal,
+document, meeting, or review process. Lite reports should lower confidence and
+state this gap explicitly rather than treating missing evidence as missing skill.
 
 ### KAIROS-ORBIT Full
 

@@ -1,7 +1,7 @@
 import { MARKERS, countMarkers } from "./lexicon.js";
 import type { KairosConversationScore, KairosMessage, Mode, ScoreSummary } from "./types.js";
 
-export const FRAMEWORK_VERSION = "kairos-orbit-v0.1";
+export const FRAMEWORK_VERSION = "kairos-orbit-v0.2";
 
 const WEIGHTS = {
   knowledge: 0.18,
@@ -50,8 +50,9 @@ export function scoreConversation(messages: KairosMessage[]): KairosConversation
     execution_markers: countMarkers(allText, MARKERS.execution),
     artifact_markers: countMarkers(allText, MARKERS.artifact) + sumArrayLengths(sorted, "artifacts_created"),
     provenance_markers: countMarkers(allText, MARKERS.provenance),
-    collegial_markers: countMarkers(allText, MARKERS.collegial),
+    coordination_markers: countMarkers(allText, MARKERS.coordination),
     affect_friction_markers: countMarkers(allText, MARKERS.affectFriction),
+    framework_template_markers: countMarkers(allText, MARKERS.frameworkTerms),
     tool_calls: sorted.reduce((acc, m) => acc + (m.has_tool_use ? 1 : 0) + (m.tool_names?.length ?? 0), 0),
     files_referenced: sumArrayLengths(sorted, "files_referenced"),
     artifacts_created: sumArrayLengths(sorted, "artifacts_created"),
@@ -64,12 +65,30 @@ export function scoreConversation(messages: KairosMessage[]): KairosConversation
 
   const mode: Mode = hasFullEvidence(sorted) ? "full" : "lite";
   const correctionWithVerification = counts.correction_markers > 0 && counts.verification_markers > 0;
-  const lowContempt = clamp(1 - counts.affect_friction_markers / 3);
+  const lowFriction = clamp(1 - counts.affect_friction_markers / 3);
   const repairQuality = counts.correction_markers === 0
     ? 0.75
     : correctionWithVerification
       ? 1
       : 0.35;
+  const operationalDensity = clamp(
+    (
+      counts.goal_markers
+      + counts.boundary_markers
+      + counts.execution_markers
+      + counts.verification_markers
+      + counts.correction_markers
+      + counts.artifact_markers
+      + counts.coordination_markers
+    ) / Math.max(2, human.length * 2),
+  );
+  const outOfBandActionsUnobserved = mode === "lite"
+    && counts.tool_calls === 0
+    && counts.files_referenced === 0
+    && counts.artifacts_created === 0
+    && counts.verification_events === 0
+    && counts.downstream_links === 0;
+  const templateStuffingRisk = counts.framework_template_markers >= 3;
 
   const knowledge = weighted([
     [0.30, bool(counts.context_markers)],
@@ -113,12 +132,11 @@ export function scoreConversation(messages: KairosMessage[]): KairosConversation
   ]);
 
   const stance = weighted([
-    [0.20, scaled(counts.collegial_markers, 2)],
-    [0.20, lowContempt],
-    [0.20, repairQuality],
-    [0.15, bool(counts.execution_markers + counts.boundary_markers) ? lowContempt : 0.7],
-    [0.15, counts.affect_friction_markers === 0 ? 1 : correctionWithVerification ? 0.7 : 0.3],
-    [0.10, bool(counts.boundary_markers)],
+    [0.25, operationalDensity],
+    [0.25, repairQuality],
+    [0.20, lowFriction],
+    [0.15, bool(counts.execution_markers + counts.boundary_markers + counts.verification_markers) ? 1 : 0.6],
+    [0.15, counts.affect_friction_markers === 0 ? 1 : correctionWithVerification ? 0.75 : 0.35],
   ]);
 
   const kairos = weighted([
@@ -151,7 +169,9 @@ export function scoreConversation(messages: KairosMessage[]): KairosConversation
     + (hasTimestamp(sorted) ? 0.12 : 0)
     + (mode === "full" ? 0.22 : 0.08)
     + (allText.length > 200 ? 0.10 : 0)
-    + (counts.verification_markers > 0 ? 0.08 : 0),
+    + (counts.verification_markers > 0 ? 0.08 : 0)
+    - (outOfBandActionsUnobserved ? 0.06 : 0)
+    - (templateStuffingRisk ? 0.08 : 0),
   );
 
   return {
@@ -175,9 +195,11 @@ export function scoreConversation(messages: KairosMessage[]): KairosConversation
     feature_flags: {
       has_full_evidence: mode === "full",
       correction_with_verification: correctionWithVerification,
-      low_contempt: lowContempt >= 0.67,
+      low_affect_friction: lowFriction >= 0.67,
       repair_quality: round(repairQuality),
       execution_opportunity: executionOpportunity,
+      out_of_band_actions_unobserved: outOfBandActionsUnobserved,
+      framework_template_stuffing_risk: templateStuffingRisk,
     },
   };
 }

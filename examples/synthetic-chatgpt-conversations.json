@@ -1,0 +1,32 @@
+[
+  {
+    "id": "chatgpt-demo-1",
+    "title": "Migration planning",
+    "mapping": {
+      "root": {
+        "message": {
+          "id": "chatgpt-demo-1-user-1",
+          "create_time": 1767272400,
+          "author": { "role": "user" },
+          "content": {
+            "parts": [
+              "I need a migration plan. Use the schema below, call out risks, and include exact verification steps."
+            ]
+          }
+        }
+      },
+      "assistant": {
+        "message": {
+          "id": "chatgpt-demo-1-assistant-1",
+          "create_time": 1767272460,
+          "author": { "role": "assistant" },
+          "content": {
+            "parts": [
+              "Here is a scoped migration plan with risks and verification."
+            ]
+          }
+        }
+      }
+    }
+  }
+]

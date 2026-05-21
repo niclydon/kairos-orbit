@@ -99,7 +99,8 @@ kairos-orbit-lite/
 The repository keeps executable code outside the skill directory so the skill
 stays small. When triggered, Claude uses the repo's public scripts:
 
-- `scripts/collect-lite-input.mjs`
+- `scripts/collect-lite-input.mjs` for discovery-only scans
+- `node dist/cli.js normalize` for deterministic native parsing
 - `dist/cli.js`
 
 If `dist/cli.js` is missing, Claude should run `npm install` and

@@ -52,9 +52,9 @@ transcript-only KAIROS-ORBIT report.
 4. Normalize approved candidates to private JSONL:
 
    ```bash
-   node scripts/collect-lite-input.mjs \
-     --roots ~/Downloads ~/Desktop ~/.claude/projects ~/.codex/sessions \
-     --out kairos-lite-input.jsonl.private
+   node dist/cli.js normalize \
+     ~/Downloads ~/Desktop ~/.claude/projects ~/.codex/sessions \
+     --output kairos-lite-input.jsonl.private
    ```
 
 5. Generate the report:
@@ -85,6 +85,10 @@ The collector can normalize:
 
 If the collector finds no useful conversations, ask the user for an export
 directory or a JSONL file matching `schemas/message.schema.json`.
+
+Prefer the native parser CLI, `node dist/cli.js normalize`, for approved input
+paths. Use `scripts/collect-lite-input.mjs --discover-only` only for candidate
+discovery before reading broad directories.
 
 ## Interpretation Guidance
 

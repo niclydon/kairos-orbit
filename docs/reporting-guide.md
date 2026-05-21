@@ -56,11 +56,11 @@ Show six dimension scores:
 
 Discuss:
 
-- Collegiality markers.
-- Friction markers.
+- Operational friction markers.
 - Correction style.
 - Repair quality.
 - Boundary/responsibility language.
+- Whether terse commands are high-density and useful rather than merely abrupt.
 
 Avoid psychological diagnosis. Keep language observational.
 
@@ -84,6 +84,7 @@ Examples:
 - Missing timestamps.
 - Small sample size.
 - One source only.
+- Lite-only out-of-band uncertainty: verification may have happened elsewhere.
 
 ## Labeling Guidance
 

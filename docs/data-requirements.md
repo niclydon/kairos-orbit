@@ -53,7 +53,7 @@ Lite mode can answer:
 - Do I ask for verification?
 - Do I catch wrong assumptions?
 - Do I repair productively after bad answers?
-- Is my tone becoming more frustrated, terse, collegial, or calibrated?
+- Is my interaction style becoming more frustrated, terse-but-effective, repair-oriented, or calibrated?
 - Are my AI conversations becoming more outcome-oriented?
 
 Lite mode should not overclaim:

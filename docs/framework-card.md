@@ -40,6 +40,7 @@ Full mode:
 - Over-interpreting sentiment markers.
 - Treating directness as rudeness.
 - Treating missing data as missing skill.
+- Treating transcript silence as proof that out-of-band verification did not happen.
 - Comparing transcript-only users to workflow-telemetry users.
 - Ignoring source mix changes over time.
 - Publishing sensitive transcripts.
@@ -61,7 +62,7 @@ Reports should disclose:
 
 Use:
 
-> "The score summarizes observable interaction patterns in the available data."
+> "The score summarizes observable structural workflow evidence in the available data."
 
 Avoid:
 
@@ -69,8 +70,16 @@ Avoid:
 
 Use:
 
-> "Social and affective stance is based on language markers and repair patterns."
+> "Social and affective stance is based on operational friction, repair quality, and responsibility language."
 
 Avoid:
 
 > "The model knows how the person felt."
+
+Use:
+
+> "Lite mode cannot see verification or integration that happened outside the transcript."
+
+Avoid:
+
+> "The user did not verify the work."

@@ -20,7 +20,7 @@ KAIROS is the full operator fluency model:
 - **I**nstrumented Execution: tools, artifacts, commands, verification actions.
 - **R**eflexive Calibration: correction, fact-checking, missing-context detection, trust calibration.
 - **O**utcome Integration: review, provenance, durable decisions or artifacts.
-- **S**ocial and Affective Stance: collegiality, frustration, dominance/warmth, repair style, responsibility boundaries.
+- **S**ocial and Affective Stance: operational friction, directness, repair utility, responsibility boundaries.
 
 ORBIT is the social/affective submodel:
 
@@ -54,7 +54,7 @@ Collect local transcript/export files into KAIROS Lite JSONL, then report:
 
 ```bash
 npm run collect:lite -- --discover-only
-npm run collect:lite -- --roots ~/Downloads ~/.claude/projects ~/.codex/sessions --out kairos-lite-input.jsonl.private
+npm run normalize -- ~/Downloads ~/.claude/projects ~/.codex/sessions --output kairos-lite-input.jsonl.private
 npm run report -- kairos-lite-input.jsonl.private --output kairos-lite-report.md
 ```
 
@@ -79,6 +79,7 @@ defaults are:
 - run locally;
 - start with `--discover-only`;
 - write normalized transcript data to `*.jsonl.private`;
+- prefer the native deterministic parsers exposed through `kairos-orbit normalize`;
 - generate a Markdown report with `node dist/cli.js report`;
 - do not commit raw exports or normalized transcript files.
 

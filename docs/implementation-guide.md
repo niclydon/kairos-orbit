@@ -30,6 +30,18 @@ chat export -> normalize messages -> score conversations -> aggregate trends
 
 Lite needs only transcript text and roles. It is the recommended default for public adoption because it matches what most people can actually export.
 
+Use the native parser CLI when possible:
+
+```bash
+node dist/cli.js normalize path/to/export-or-folder --output kairos-lite-input.jsonl.private
+```
+
+The parser modules live under `src/parsers/` and provide deterministic adapters
+for ChatGPT-style exports, Claude-like JSON exports, generic JSON/JSONL rows,
+and role-prefixed Markdown/text transcripts. Do not rely on an LLM to invent a
+new mapping at runtime unless these deterministic adapters fail and the user has
+approved a new adapter design.
+
 ## Full Pipeline
 
 ```text

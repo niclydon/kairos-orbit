@@ -50,7 +50,11 @@ Framework mapping:
 
 ## Politeness, Power, And Social Stance
 
-Computational politeness and interpersonal stance research provide ways to study observable relational language: directness, deference, warmth, dominance, and social power.
+Computational politeness and interpersonal stance research provide ways to
+study observable relational language: directness, deference, dominance, repair,
+and social power. KAIROS-ORBIT uses this literature cautiously. The public
+reference scorer does not treat warmth or politeness as inherently better than
+terse operational command language.
 
 Relevant sources:
 
@@ -61,7 +65,8 @@ Framework mapping:
 
 - Social and Affective Stance.
 - ORBIT Dominance / Agency.
-- ORBIT Communion / Warmth.
+- ORBIT Operational Friction.
+- ORBIT Repair Utility.
 
 ## Emotion And Dialogue Corpora
 
