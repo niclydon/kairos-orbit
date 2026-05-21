@@ -60,6 +60,28 @@ npm run report -- kairos-lite-input.jsonl.private --output kairos-lite-report.md
 
 The CLI expects JSONL with one message per line. Full-mode fields are optional extensions on the same message schema. See [schemas/message.schema.json](schemas/message.schema.json).
 
+## Run From A Coding Agent
+
+If you are using Codex, Claude Code, or another local coding CLI, point the
+agent at this repository and ask:
+
+```text
+Use this repository to run KAIROS-ORBIT Lite on my local AI conversation
+exports. Start with a discovery-only pass, normalize approved transcript files
+to a private JSONL file, generate a Markdown report, and explain the confidence
+and data gaps.
+```
+
+Agents should follow [Agent quickstart](docs/agent-quickstart.md) and
+[Coding CLI integration guide](docs/coding-cli-integration.md). The important
+defaults are:
+
+- run locally;
+- start with `--discover-only`;
+- write normalized transcript data to `*.jsonl.private`;
+- generate a Markdown report with `node dist/cli.js report`;
+- do not commit raw exports or normalized transcript files.
+
 ## Input Example
 
 ```json
@@ -135,6 +157,7 @@ npm run skill:install
 ## Documentation
 
 - [Framework specification](docs/framework.md)
+- [Agent quickstart](docs/agent-quickstart.md)
 - [Data requirements](docs/data-requirements.md)
 - [Lite framework](docs/lite.md)
 - [Full framework](docs/full.md)

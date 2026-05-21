@@ -72,6 +72,9 @@ That distinction matters. Lite is a strong model for **conversation habits** and
 5. Look at trends by month or quarter.
 6. Use examples for reflection, not judgment.
 
+For local coding agents, see [Agent quickstart](agent-quickstart.md). For a
+Claude-compatible skill workflow, see [Claude skill](claude-skill.md).
+
 ## Lite Limitations
 
 - It cannot infer hidden emotional state.

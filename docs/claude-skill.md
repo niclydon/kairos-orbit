@@ -45,6 +45,9 @@ Or ask naturally:
 Run KAIROS-ORBIT Lite on my local AI conversation exports and generate a report.
 ```
 
+Claude should first run a discovery-only pass and show candidate files before
+normalizing broad local folders.
+
 ## Personal Claude Code Install
 
 To make the skill available across projects:
@@ -61,6 +64,19 @@ This copies the skill to:
 ~/.claude/skills/kairos-orbit-lite/
 ```
 
+After installation, open Claude Code in any project and run:
+
+```text
+/kairos-orbit-lite
+```
+
+or ask:
+
+```text
+Use KAIROS-ORBIT Lite to analyze my accessible AI conversation history and
+generate a local report.
+```
+
 ## Claude.ai Custom Skill Packaging
 
 For Claude.ai custom skill upload, package the skill directory itself:
@@ -73,6 +89,22 @@ zip -r kairos-orbit-lite.zip kairos-orbit-lite
 Upload `kairos-orbit-lite.zip` as a custom skill. The skill can instruct Claude
 to clone the public repository when it needs the scorer and collector scripts.
 
+## Skill Directory Structure
+
+```text
+kairos-orbit-lite/
+└── SKILL.md
+```
+
+The repository keeps executable code outside the skill directory so the skill
+stays small. When triggered, Claude uses the repo's public scripts:
+
+- `scripts/collect-lite-input.mjs`
+- `dist/cli.js`
+
+If `dist/cli.js` is missing, Claude should run `npm install` and
+`npm run build` first.
+
 ## Safety Boundaries
 
 - Ask before scanning broad directories.
@@ -81,8 +113,23 @@ to clone the public repository when it needs the scorer and collector scripts.
 - Do not commit raw exports or normalized transcript files.
 - Treat scores as exploratory evidence, not diagnosis or ranking.
 
+## Expected Skill Output
+
+The skill should finish by reporting:
+
+- normalized private JSONL path;
+- Markdown report path;
+- conversations scored;
+- source labels;
+- date range;
+- Operator Index;
+- confidence;
+- strongest and softest dimensions;
+- data gaps.
+
 See also:
 
+- `docs/agent-quickstart.md`
 - `docs/coding-cli-integration.md`
 - `docs/lite.md`
 - `docs/data-requirements.md`
