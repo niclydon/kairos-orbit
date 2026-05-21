@@ -2,6 +2,25 @@
 
 KAIROS-ORBIT reports should be clear about what was measured and what was not measured.
 
+## Reference Report Generator
+
+The public package includes a deterministic Markdown report generator:
+
+```bash
+npm run build
+node dist/cli.js report examples/synthetic-chat.jsonl --output report.md
+```
+
+The command reads the same JSONL message input as the scorer, scores the conversations, and writes a human-readable report. If `--output` is omitted, the Markdown report is printed to stdout.
+
+Supported format:
+
+```bash
+node dist/cli.js report examples/synthetic-chat.jsonl --format markdown
+```
+
+The report generator is intentionally conservative. It summarizes observable scores, confidence, coverage, interaction signals, and data gaps. It does not attempt psychological diagnosis or unsupported causal interpretation.
+
 ## Required Report Metadata
 
 Every report should state:

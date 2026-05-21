@@ -9,7 +9,8 @@
   "scripts": {
     "build": "tsc",
     "score": "node dist/cli.js",
-    "check": "npm run build && node dist/cli.js examples/synthetic-chat.jsonl > /tmp/kairos-orbit-smoke.json"
+    "report": "node dist/cli.js report",
+    "check": "npm run build && node dist/cli.js score examples/synthetic-chat.jsonl > /tmp/kairos-orbit-smoke.json && node dist/cli.js report examples/synthetic-chat.jsonl --output /tmp/kairos-orbit-report.md"
   },
   "keywords": [
     "ai-literacy",

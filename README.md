@@ -44,6 +44,12 @@ Run the Full synthetic example:
 npm run score -- examples/synthetic-full-workflow.jsonl
 ```
 
+Generate a Markdown report:
+
+```bash
+npm run report -- examples/synthetic-chat.jsonl --output report.md
+```
+
 The CLI expects JSONL with one message per line. Full-mode fields are optional extensions on the same message schema. See [schemas/message.schema.json](schemas/message.schema.json).
 
 ## Input Example
@@ -73,6 +79,22 @@ The scorer returns conversation-level KAIROS-ORBIT scores:
 ```
 
 Scores are exploratory. Treat them as structured evidence for reflection or research, not as a validated psychometric instrument.
+
+## Report Output
+
+The report generator produces a Markdown KAIROS-ORBIT Operator Fluency Report with:
+
+- summary metadata, mode mix, source count, date range, score, Operator Index, and confidence;
+- six-dimension profile with research-facing descriptions;
+- interaction signal rates for verification, artifacts, corrections, corrections with verification, and affect friction;
+- highlights, data gaps, and interpretation notes.
+
+```bash
+npm run build
+node dist/cli.js report examples/synthetic-chat.jsonl --output report.md
+```
+
+The report is designed for human review. Use the JSON scorer output when you need machine-readable results or downstream analytics.
 
 ## Documentation
 
