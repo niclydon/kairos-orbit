@@ -1,5 +1,9 @@
 # KAIROS-ORBIT
 
+## KAIROS-ORBIT Operator Fluency Report
+
+A longitudinal view of how effectively the operator collaborates with AI systems across planning, execution, verification, repair, and outcome integration.
+
 KAIROS-ORBIT is a research-grounded framework for analyzing how people collaborate with AI systems over time. It is designed to work at two levels:
 
 - **Lite**: transcript-only analysis for ordinary chat exports.
