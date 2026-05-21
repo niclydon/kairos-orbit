@@ -6,6 +6,9 @@ coverage/
 .env.*
 *.log
 *.jsonl.private
+kairos-report.md
+kairos-lite-report.md
+kairos-scores.json
 private/
 exports/
 data/

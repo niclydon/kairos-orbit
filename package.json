@@ -10,7 +10,9 @@
     "build": "tsc",
     "score": "node dist/cli.js",
     "report": "node dist/cli.js report",
-    "check": "npm run build && node dist/cli.js score examples/synthetic-chat.jsonl > /tmp/kairos-orbit-smoke.json && node dist/cli.js report examples/synthetic-chat.jsonl --output /tmp/kairos-orbit-report.md"
+    "collect:lite": "node scripts/collect-lite-input.mjs",
+    "skill:install": "bash scripts/install-claude-skill.sh",
+    "check": "npm run build && node dist/cli.js score examples/synthetic-chat.jsonl > /tmp/kairos-orbit-smoke.json && node dist/cli.js report examples/synthetic-chat.jsonl --output /tmp/kairos-orbit-report.md && node scripts/collect-lite-input.mjs --roots examples --out /tmp/kairos-orbit-collected.jsonl && node dist/cli.js report /tmp/kairos-orbit-collected.jsonl --output /tmp/kairos-orbit-collected-report.md"
   },
   "keywords": [
     "ai-literacy",

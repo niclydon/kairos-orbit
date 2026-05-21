@@ -50,6 +50,14 @@ Generate a Markdown report:
 npm run report -- examples/synthetic-chat.jsonl --output report.md
 ```
 
+Collect local transcript/export files into KAIROS Lite JSONL, then report:
+
+```bash
+npm run collect:lite -- --discover-only
+npm run collect:lite -- --roots ~/Downloads ~/.claude/projects ~/.codex/sessions --out kairos-lite-input.jsonl.private
+npm run report -- kairos-lite-input.jsonl.private --output kairos-lite-report.md
+```
+
 The CLI expects JSONL with one message per line. Full-mode fields are optional extensions on the same message schema. See [schemas/message.schema.json](schemas/message.schema.json).
 
 ## Input Example
@@ -96,12 +104,42 @@ node dist/cli.js report examples/synthetic-chat.jsonl --output report.md
 
 The report is designed for human review. Use the JSON scorer output when you need machine-readable results or downstream analytics.
 
+## Coding CLI And Claude Skill
+
+This repository is designed to be usable by coding CLIs such as Codex and Claude
+Code. The integration guide explains how an agent should discover local exports,
+normalize transcript data, run the Lite scorer, and explain the resulting report
+to the user:
+
+- [Coding CLI integration guide](docs/coding-cli-integration.md)
+- [Claude skill installation and usage](docs/claude-skill.md)
+
+The repo also includes a Claude-compatible project skill:
+
+```text
+.claude/skills/kairos-orbit-lite/SKILL.md
+```
+
+When Claude Code is opened in this repo, the skill can be invoked with:
+
+```text
+/kairos-orbit-lite
+```
+
+To install it as a personal Claude Code skill:
+
+```bash
+npm run skill:install
+```
+
 ## Documentation
 
 - [Framework specification](docs/framework.md)
 - [Data requirements](docs/data-requirements.md)
 - [Lite framework](docs/lite.md)
 - [Full framework](docs/full.md)
+- [Coding CLI integration guide](docs/coding-cli-integration.md)
+- [Claude skill guide](docs/claude-skill.md)
 - [Scoring model](docs/scoring-model.md)
 - [Implementation guide](docs/implementation-guide.md)
 - [Reporting guide](docs/reporting-guide.md)
