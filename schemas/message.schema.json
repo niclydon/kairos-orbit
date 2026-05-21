@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/kairos-orbit/message.schema.json",
+  "title": "KAIROS-ORBIT normalized message",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_platform",
+    "conversation_id",
+    "turn_id",
+    "turn_index",
+    "role",
+    "content_text"
+  ],
+  "properties": {
+    "source_platform": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Generic source label such as chat_export, assistant_a, coding_agent, or another non-sensitive platform name."
+    },
+    "conversation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "turn_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "turn_index": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "timestamp": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "role": {
+      "type": "string",
+      "enum": ["human", "assistant", "system", "tool"]
+    },
+    "content_text": {
+      "type": "string"
+    },
+    "is_synthetic_or_system_context": {
+      "type": "boolean",
+      "default": false
+    },
+    "tool_names": {
+      "type": "array",
+      "default": [],
+      "items": { "type": "string" }
+    },
+    "has_tool_use": {
+      "type": "boolean",
+      "default": false
+    },
+    "tool_result_status": {
+      "type": ["string", "null"],
+      "enum": ["success", "failure", "blocked", "skipped", "unknown", null]
+    },
+    "files_referenced": {
+      "type": "array",
+      "default": [],
+      "items": { "type": "string" }
+    },
+    "artifacts_created": {
+      "type": "array",
+      "default": [],
+      "items": { "type": "string" }
+    },
+    "verification_events": {
+      "type": "array",
+      "default": [],
+      "items": { "type": "string" }
+    },
+    "downstream_links": {
+      "type": "array",
+      "default": [],
+      "items": { "type": "string" }
+    },
+    "human_feedback": {
+      "type": ["string", "null"],
+      "enum": ["accepted", "rejected", "revised", "deferred", "unknown", null]
+    },
+    "metadata": {
+      "type": "object",
+      "default": {},
+      "additionalProperties": true
+    }
+  }
+}

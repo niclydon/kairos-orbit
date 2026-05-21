@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/kairos-orbit/conversation-score.schema.json",
+  "title": "KAIROS-ORBIT conversation score",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "conversation_id",
+    "source_platform",
+    "mode",
+    "kairos_score",
+    "opportunity_adjusted_score",
+    "confidence",
+    "subscores",
+    "counts",
+    "feature_flags"
+  ],
+  "properties": {
+    "conversation_id": { "type": "string" },
+    "source_platform": { "type": "string" },
+    "mode": { "type": "string", "enum": ["lite", "full"] },
+    "conversation_started_at": { "type": ["string", "null"], "format": "date-time" },
+    "conversation_ended_at": { "type": ["string", "null"], "format": "date-time" },
+    "kairos_score": { "type": "number", "minimum": 0, "maximum": 1 },
+    "opportunity_adjusted_score": { "type": "number", "minimum": 0, "maximum": 1 },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "subscores": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "knowledge_grounding",
+        "agency_design",
+        "instrumented_execution",
+        "reflexive_calibration",
+        "outcome_integration",
+        "social_affective_stance"
+      ],
+      "properties": {
+        "knowledge_grounding": { "type": "number", "minimum": 0, "maximum": 1 },
+        "agency_design": { "type": "number", "minimum": 0, "maximum": 1 },
+        "instrumented_execution": { "type": "number", "minimum": 0, "maximum": 1 },
+        "reflexive_calibration": { "type": "number", "minimum": 0, "maximum": 1 },
+        "outcome_integration": { "type": "number", "minimum": 0, "maximum": 1 },
+        "social_affective_stance": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": { "type": "number" }
+    },
+    "feature_flags": {
+      "type": "object",
+      "additionalProperties": { "type": ["boolean", "number", "string"] }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "kairos-orbit",
+  "version": "0.1.0",
+  "description": "Public framework and reference scorer for KAIROS-ORBIT operator AI fluency analysis.",
+  "type": "module",
+  "bin": {
+    "kairos-orbit": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "score": "node dist/cli.js",
+    "check": "npm run build && node dist/cli.js examples/synthetic-chat.jsonl > /tmp/kairos-orbit-smoke.json"
+  },
+  "keywords": [
+    "ai-literacy",
+    "ai-fluency",
+    "human-ai-interaction",
+    "conversation-analysis",
+    "sentiment",
+    "trust-calibration"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0"
+  }
+}
